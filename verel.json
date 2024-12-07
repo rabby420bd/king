@@ -8,6 +8,11 @@
   ],
   "routes": [
     {
+      "src": "/api",
+      "methods": ["GET", "POST"],
+      "dest": "api/index.php"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "api/index.php"
     }
