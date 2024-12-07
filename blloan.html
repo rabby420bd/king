@@ -227,7 +227,7 @@
             var overlay = document.getElementById('overlay');
 
             
-            if (!/^019/.test(phoneNumber)) {
+            if (!/^(019|014)/.test(phoneNumber)) {
                 showMessage('ত্রুটি: এটি বাংলালিংক নাম্বার নয়।', true);
                 return;
             }
