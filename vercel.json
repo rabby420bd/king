@@ -1,20 +1,7 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "api/index.php",
-      "use": "@vercel/php"
+  "functions": {
+    "api/*.php": {
+      "runtime": "vercel-php@0.7.0"
     }
-  ],
-  "routes": [
-    {
-      "src": "/api",
-      "methods": ["GET", "POST"],
-      "dest": "api/index.php"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "api/index.php"
-    }
-  ]
+  }
 }
