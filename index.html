@@ -3,49 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Live Sports Streams</title>
+  <title>HLS Player with Headers</title>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body>
-
-  <h1>Live Sports Streams</h1>
-
-  <div id="streams"></div>
-
+  <h1>T Sports Live 03</h1>
+  <video id="video" width="600" controls></video>
+  
   <script>
-    fetch('channels.json')  // Adjust if your JSON file is located elsewhere
-      .then(response => response.json())
-      .then(data => {
-        const streamsContainer = document.getElementById('streams');
-        
-        data.channels.forEach(channel => {
-          const channelDiv = document.createElement('div');
-          channelDiv.style.marginBottom = '20px';
-          
-          const logo = document.createElement('img');
-          logo.src = channel.logo;
-          logo.alt = channel.name;
-          logo.style.maxWidth = '200px';
-          channelDiv.appendChild(logo);
-          
-          const name = document.createElement('h2');
-          name.innerText = channel.name;
-          channelDiv.appendChild(name);
-          
-          const link = document.createElement('a');
-          link.href = channel.link;
-          link.target = '_blank';
-          link.innerText = 'Watch Now';
-          channelDiv.appendChild(link);
+    if (Hls.isSupported()) {
+      var video = document.getElementById('video');
+      var hls = new Hls({
+        xhrSetup: function(xhr) {
+          // Set headers for authentication
+          xhr.setRequestHeader('Cookie', 'Edge-Cache-Cookie=URLPrefix=aHR0cHM6Ly9saXZlLWNkbi50c3BvcnRzLmNvbS8:Expires=1734251896:KeyName=tsports-ed25519-01:Signature=OwdpHcnUmZFfpTE8mYvJ7vcBSvIUiZBw-BT6XdxckYxYKq0DkufZ5_bZTtWqL0blgrdGmVkvpyfxQ0M05-5MAg');
+          xhr.setRequestHeader('Host', 'live-cdn.tsports.com');
+          xhr.setRequestHeader('User-agent', 'https://github.com/byte-capsule (Linux;Android 14)');
+        }
+      });
 
-          // Add headers if needed for custom requests
-          const headers = new Headers(channel.headers);
-          // You can use the headers to fetch m3u8 streams or use in video players
+      // Load the stream using the URL from the .m3u8 file
+      hls.loadSource('https://live-cdn.tsports.com/live-03/playlist.m3u8');
+      hls.attachMedia(video);
 
-          streamsContainer.appendChild(channelDiv);
-        });
-      })
-      .catch(error => console.error('Error loading streams:', error));
+      hls.on(Hls.Events.MANIFEST_PARSED, function(event, data) {
+        console.log('Manifest loaded, found ' + data.levels.length + ' levels');
+      });
+    } else {
+      console.error('HLS.js is not supported in this browser');
+    }
   </script>
-
 </body>
 </html>
