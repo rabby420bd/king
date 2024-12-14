@@ -1,117 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TSports Live Matches</title>
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f3f3f3;
-    }
-    header {
-      background: #1c1c1c;
-      color: white;
-      padding: 10px 20px;
-      text-align: center;
-    }
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding: 20px;
-      justify-content: center;
-    }
-    .channel {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      width: 300px;
-    }
-    .channel img {
-      width: 100%;
-      height: auto;
-    }
-    .channel-info {
-      padding: 15px;
-    }
-    .channel-info h3 {
-      margin: 0 0 10px;
-      font-size: 18px;
-    }
-    .video-container {
-      position: relative;
-      padding-top: 56.25%; /* 16:9 Aspect Ratio */
-    }
-    video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      outline: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TSports Live Matches</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .channel {
+            background-color: white;
+            border-radius: 10px;
+            margin: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 280px;
+            text-align: center;
+        }
+        .channel img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .channel h3 {
+            margin: 10px 0;
+        }
+        .channel p {
+            color: #777;
+        }
+        .channel a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .channel a:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-  <header>
+
     <h1>TSports Live Matches</h1>
-  </header>
-  <div class="container" id="channels">
-    <!-- Channels will be dynamically loaded here -->
-  </div>
+    <div class="container" id="channels-container">
+        <!-- Channel information will be populated here -->
+    </div>
 
-  <script>
-    const apiURL = "https://raw.githubusercontent.com/byte-capsule/TSports-m3u8-Grabber/main/TSports_m3u8_headers.Json";
-
-    async function loadChannels() {
-      try {
-        const response = await fetch(apiURL);
-        const data = await response.json();
-
-        const container = document.getElementById('channels');
-        data.channels.forEach(channel => {
-          const channelElement = document.createElement('div');
-          channelElement.className = 'channel';
-
-          channelElement.innerHTML = `
-            <img src="${channel.logo}" alt="${channel.name}">
-            <div class="channel-info">
-              <h3>${channel.name}</h3>
-              <div class="video-container">
-                <video id="video-${channel.name.replace(/\s+/g, '-')}"></video>
-              </div>
-            </div>
-          `;
-
-          // Append the channel card to the container
-          container.appendChild(channelElement);
-
-          // Initialize HLS.js with proxy
-          const videoElement = document.getElementById(`video-${channel.name.replace(/\s+/g, '-')}`);
-          if (Hls.isSupported()) {
-            const hls = new Hls();
-            // Using the proxy for the stream
-            hls.loadSource(`/proxy?channel=${encodeURIComponent(channel.name)}&url=${encodeURIComponent(channel.link)}`);
-            hls.attachMedia(videoElement);
-          } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
-            // For Safari
-            videoElement.src = `/proxy?channel=${encodeURIComponent(channel.name)}&url=${encodeURIComponent(channel.link)}`;
-          } else {
-            videoElement.innerHTML = `<p>Your browser does not support HLS playback.</p>`;
-          }
+    <script>
+        // Fetch JSON data from the API
+        fetch('https://raw.githubusercontent.com/byte-capsule/TSports-m3u8-Grabber/main/TSports_m3u8_headers.Json', {
+            method: 'GET',
+            headers: {
+                'Cookie': 'Edge-Cache-Cookie=URLPrefix=aHR0cHM6Ly9saXZlLWNkbi50c3BvcnRzLmNvbS8:Expires=1734251896:KeyName=tsports-ed25519-01:Signature=OwdpHcnUmZFfpTE8mYvJ7vcBSvIUiZBw-BT6XdxckYxYKq0DkufZ5_bZTtWqL0blgrdGmVkvpyfxQ0M05-5MAg',
+                'Host': 'live-cdn.tsports.com',
+                'User-agent': 'https://github.com/byte-capsule (Linux;Android 14)'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Get the channels from the API response
+            const channels = data.channels;
+            const container = document.getElementById('channels-container');
+            
+            channels.forEach(channel => {
+                // Create a new div for each channel
+                const channelDiv = document.createElement('div');
+                channelDiv.classList.add('channel');
+                
+                // Add logo
+                const logo = document.createElement('img');
+                logo.src = channel.logo;
+                logo.alt = `${channel.name} logo`;
+                channelDiv.appendChild(logo);
+                
+                // Add channel name
+                const channelName = document.createElement('h3');
+                channelName.textContent = channel.name;
+                channelDiv.appendChild(channelName);
+                
+                // Add category
+                const category = document.createElement('p');
+                category.textContent = `Category: ${channel.category_name}`;
+                channelDiv.appendChild(category);
+                
+                // Add link to stream
+                const streamLink = document.createElement('a');
+                streamLink.href = channel.link;
+                streamLink.target = '_blank';
+                streamLink.textContent = 'Watch Live';
+                channelDiv.appendChild(streamLink);
+                
+                // Append the channel div to the container
+                container.appendChild(channelDiv);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
         });
-      } catch (error) {
-        console.error("Failed to load channels:", error);
-      }
-    }
+    </script>
 
-    loadChannels();
-  </script>
 </body>
 </html>
