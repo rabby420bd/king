@@ -1,5 +1,3 @@
 #EXTM3U
 #EXTINF:-1, T Sports Live 03
-#EXT-X-STREAM-INF:PROGRAM-ID=1, BANDWIDTH=1500000
-#EXT-X-SESSION-KEY: "Edge-Cache-Cookie=URLPrefix=aHR0cHM6Ly9saXZlLWNkbi50c3BvcnRzLmNvbS8:Expires=1734251896:KeyName=tsports-ed25519-01:Signature=OwdpHcnUmZFfpTE8mYvJ7vcBSvIUiZBw-BT6XdxckYxYKq0DkufZ5_bZTtWqL0blgrdGmVkvpyfxQ0M05-5MAg"
 #EXT-X-URI: https://live-cdn.tsports.com/live-03/playlist.m3u8
