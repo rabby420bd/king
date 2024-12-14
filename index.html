@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Sports Streams</title>
+</head>
+<body>
+
+  <h1>Live Sports Streams</h1>
+
+  <div id="streams"></div>
+
+  <script>
+    fetch('channels.json')  // Adjust if your JSON file is located elsewhere
+      .then(response => response.json())
+      .then(data => {
+        const streamsContainer = document.getElementById('streams');
+        
+        data.channels.forEach(channel => {
+          const channelDiv = document.createElement('div');
+          channelDiv.style.marginBottom = '20px';
+          
+          const logo = document.createElement('img');
+          logo.src = channel.logo;
+          logo.alt = channel.name;
+          logo.style.maxWidth = '200px';
+          channelDiv.appendChild(logo);
+          
+          const name = document.createElement('h2');
+          name.innerText = channel.name;
+          channelDiv.appendChild(name);
+          
+          const link = document.createElement('a');
+          link.href = channel.link;
+          link.target = '_blank';
+          link.innerText = 'Watch Now';
+          channelDiv.appendChild(link);
+
+          // Add headers if needed for custom requests
+          const headers = new Headers(channel.headers);
+          // You can use the headers to fetch m3u8 streams or use in video players
+
+          streamsContainer.appendChild(channelDiv);
+        });
+      })
+      .catch(error => console.error('Error loading streams:', error));
+  </script>
+
+</body>
+</html>
