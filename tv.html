@@ -51,6 +51,15 @@
         .channel a:hover {
             background-color: #0056b3;
         }
+        .video-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        video {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -60,7 +69,13 @@
         <!-- Channel information will be populated here -->
     </div>
 
+    <div class="video-container" id="video-container">
+        <!-- The video player will be dynamically added here -->
+    </div>
+
     <script>
+        let globalCookie = ''; // Variable to store the cookie for use in requests
+
         // Fetch JSON data from the API
         fetch('https://raw.githubusercontent.com/byte-capsule/TSports-m3u8-Grabber/main/TSports_m3u8_headers.Json', {
             method: 'GET',
@@ -72,12 +87,14 @@
         })
         .then(response => response.json())
         .then(data => {
-            // Get the channels from the API response
             const channels = data.channels;
             const container = document.getElementById('channels-container');
             
+            // Store the cookie from the response headers
+            globalCookie = data.channels[0].headers.Cookie;  // Assuming the cookie is the same for all channels
+
+            // Iterate through the channels and create channel cards
             channels.forEach(channel => {
-                // Create a new div for each channel
                 const channelDiv = document.createElement('div');
                 channelDiv.classList.add('channel');
                 
@@ -97,11 +114,11 @@
                 category.textContent = `Category: ${channel.category_name}`;
                 channelDiv.appendChild(category);
                 
-                // Add link to stream
+                // Add link to stream and on-click event to play video
                 const streamLink = document.createElement('a');
-                streamLink.href = channel.link;
-                streamLink.target = '_blank';
+                streamLink.href = '#';
                 streamLink.textContent = 'Watch Live';
+                streamLink.onclick = () => playStream(channel.link, globalCookie, channel.headers);
                 channelDiv.appendChild(streamLink);
                 
                 // Append the channel div to the container
@@ -111,6 +128,33 @@
         .catch(error => {
             console.error('Error fetching data:', error);
         });
+
+        // Function to play video using headers from JSON
+        function playStream(videoUrl, cookie, headers) {
+            const videoContainer = document.getElementById('video-container');
+            videoContainer.innerHTML = ''; // Clear any existing video
+
+            const videoElement = document.createElement('video');
+            videoElement.controls = true;
+
+            // Make a fetch request to the video stream with headers
+            fetch(videoUrl, {
+                method: 'GET',
+                headers: {
+                    ...headers,
+                    'Cookie': cookie // Use the stored cookie for this request
+                }
+            })
+            .then(response => response.blob())
+            .then(blob => {
+                const videoBlobUrl = URL.createObjectURL(blob);
+                videoElement.src = videoBlobUrl;
+                videoContainer.appendChild(videoElement);
+            })
+            .catch(error => {
+                console.error('Error loading video:', error);
+            });
+        }
     </script>
 
 </body>
