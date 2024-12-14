@@ -96,11 +96,12 @@
           const videoElement = document.getElementById(`video-${channel.name.replace(/\s+/g, '-')}`);
           if (Hls.isSupported()) {
             const hls = new Hls();
-            hls.loadSource(`/stream/${encodeURIComponent(channel.link)}`);
+            // Using the proxy for the stream
+            hls.loadSource(`/proxy?channel=${encodeURIComponent(channel.name)}&url=${encodeURIComponent(channel.link)}`);
             hls.attachMedia(videoElement);
           } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
             // For Safari
-            videoElement.src = `/stream/${encodeURIComponent(channel.link)}`;
+            videoElement.src = `/proxy?channel=${encodeURIComponent(channel.name)}&url=${encodeURIComponent(channel.link)}`;
           } else {
             videoElement.innerHTML = `<p>Your browser does not support HLS playback.</p>`;
           }
