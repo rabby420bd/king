@@ -1,37 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HLS Player with Headers</title>
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T Sports Live Streams</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .stream-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .stream {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 300px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .stream img {
+            width: 100%;
+            border-radius: 4px;
+        }
+        .stream h3 {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .stream a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .stream a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-  <h1>T Sports Live 03</h1>
-  <video id="video" width="600" controls></video>
-  
-  <script>
-    if (Hls.isSupported()) {
-      var video = document.getElementById('video');
-      var hls = new Hls({
-        xhrSetup: function(xhr) {
-          // Set headers for authentication
-          xhr.setRequestHeader('Cookie', 'Edge-Cache-Cookie=URLPrefix=aHR0cHM6Ly9saXZlLWNkbi50c3BvcnRzLmNvbS8:Expires=1734251896:KeyName=tsports-ed25519-01:Signature=OwdpHcnUmZFfpTE8mYvJ7vcBSvIUiZBw-BT6XdxckYxYKq0DkufZ5_bZTtWqL0blgrdGmVkvpyfxQ0M05-5MAg');
-          xhr.setRequestHeader('Host', 'live-cdn.tsports.com');
-          xhr.setRequestHeader('User-agent', 'https://github.com/byte-capsule (Linux;Android 14)');
+    <h1>T Sports Live Streams</h1>
+    <div id="streamContainer" class="stream-container"></div>
+
+    <script>
+        const apiUrl = "/api/proxy";
+
+        async function loadStreams() {
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error("Failed to fetch streams");
+                }
+                const data = await response.json();
+
+                const container = document.getElementById("streamContainer");
+                data.forEach(stream => {
+                    const streamDiv = document.createElement("div");
+                    streamDiv.className = "stream";
+
+                    streamDiv.innerHTML = `
+                        <img src="${stream.logo}" alt="${stream.name}">
+                        <h3>${stream.name}</h3>
+                        <p><strong>Origin:</strong> ${stream.origin}</p>
+                        <a href="${stream.link}" target="_blank">Watch Stream</a>
+                    `;
+                    container.appendChild(streamDiv);
+                });
+            } catch (error) {
+                console.error("Error loading streams:", error);
+            }
         }
-      });
 
-      // Load the stream using the URL from the .m3u8 file
-      hls.loadSource('https://live-cdn.tsports.com/live-03/playlist.m3u8');
-      hls.attachMedia(video);
-
-      hls.on(Hls.Events.MANIFEST_PARSED, function(event, data) {
-        console.log('Manifest loaded, found ' + data.levels.length + ' levels');
-      });
-    } else {
-      console.error('HLS.js is not supported in this browser');
-    }
-  </script>
+        loadStreams();
+    </script>
 </body>
 </html>
