@@ -1,8 +1,6 @@
 {
   "functions": {
-    "api/*.php": {
-      "runtime": "vercel-php"
-    }
+    "api/*.php": {}
   },
   "routes": [
     { "src": "/(.*)", "dest": "/api/$1.php" }
