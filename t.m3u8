@@ -1,4 +1,0 @@
-#EXTINF:-1 group-title="LIVE" tvg-chno="" tvg-id="", T Sports Live 02
-#EXTVLCOPT:http-user-agent=https://github.com/byte-capsule (Linux;Android 14)
-#EXTHTTP:{"cookie":"Edge-Cache-Cookie=URLPrefix=aHR0cHM6Ly9saXZlLWNkbi50c3BvcnRzLmNvbS8:Expires=1734299449:KeyName=tsports-ed25519-01:Signature=lzdxVFwP1u5qpcbfobX1spIIO73v7i3wywq_JDWK-q68ud8nYsuTlvkcCGHJnFKNZn2KQTyk807AfrgLH9OuAg"}
-https://live-cdn.tsports.com/live-02/index.m3u8
