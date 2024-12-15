@@ -17,24 +17,17 @@
         .stream {
             border: 1px solid #ddd;
             border-radius: 8px;
-            width: 300px;
+            width: 320px;
             padding: 15px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        .stream img {
+        .stream video {
             width: 100%;
             border-radius: 4px;
         }
         .stream h3 {
             font-size: 1.2em;
             margin: 10px 0;
-        }
-        .stream a {
-            color: #007BFF;
-            text-decoration: none;
-        }
-        .stream a:hover {
-            text-decoration: underline;
         }
     </style>
 </head>
@@ -43,7 +36,7 @@
     <div id="streamContainer" class="stream-container"></div>
 
     <script>
-        const apiUrl = "/api/proxy";
+        const apiUrl = "/api/proxy"; // Serverless function URL on Vercel
 
         async function loadStreams() {
             try {
@@ -51,19 +44,22 @@
                 if (!response.ok) {
                     throw new Error("Failed to fetch streams");
                 }
-                const data = await response.json();
 
+                const data = await response.json();
                 const container = document.getElementById("streamContainer");
+
                 data.forEach(stream => {
                     const streamDiv = document.createElement("div");
                     streamDiv.className = "stream";
 
                     streamDiv.innerHTML = `
-                        <img src="${stream.logo}" alt="${stream.name}">
                         <h3>${stream.name}</h3>
-                        <p><strong>Origin:</strong> ${stream.origin}</p>
-                        <a href="${stream.link}" target="_blank">Watch Stream</a>
+                        <video controls>
+                            <source src="${stream.link}" type="application/x-mpegURL">
+                            Your browser does not support the video tag.
+                        </video>
                     `;
+
                     container.appendChild(streamDiv);
                 });
             } catch (error) {
