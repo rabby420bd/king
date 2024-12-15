@@ -1,8 +1,0 @@
-{
-  "functions": {
-    "api/*.php": {}
-  },
-  "routes": [
-    { "src": "/(.*)", "dest": "/api/$1.php" }
-  ]
-}
