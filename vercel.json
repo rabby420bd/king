@@ -4,12 +4,20 @@
     {
       "src": "api/*.php",
       "use": "@vercel/php"
+    },
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
       "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*).html",
+      "dest": "/$1.html"
     }
   ]
 }
