@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TSports Video Player</title>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #222;
+    }
+    video {
+      width: 80%;
+      max-width: 800px;
+      height: auto;
+      background-color: black;
+    }
+  </style>
+</head>
+<body>
+  <video id="video" controls autoplay></video>
+  <script>
+    async function fetchStreamDetails() {
+      const apiUrl = 'https://raw.githubusercontent.com/byte-capsule/TSports-m3u8-Grabber/main/NS_Player_Tsports_live.m3u';
+      try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+
+        // Extract required fields
+        const m3u8Link = data[1].link;
+        const headers = {
+          'Origin': data[1].origin,
+          'Referer': data[1].referrer,
+          'User-Agent': data[1].userAgent,
+          'Cookie': data[1].cookie,
+        };
+
+        // Initialize HLS.js
+        const video = document.getElementById('video');
+        if (Hls.isSupported()) {
+          const hls = new Hls();
+          hls.loadSource(m3u8Link);
+
+          // Add custom headers
+          hls.on(Hls.Events.FRAG_LOADING, function(event, data) {
+            data.networkDetails.setRequestHeader = (name, value) => {
+              if (headers[name]) data.networkDetails.setRequestHeader(name, headers[name]);
+            };
+          });
+
+          hls.attachMedia(video);
+          hls.on(Hls.Events.MANIFEST_PARSED, function() {
+            video.play();
+          });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+          // For Safari
+          video.src = m3u8Link;
+          video.play();
+        } else {
+          alert('HLS is not supported in this browser.');
+        }
+      } catch (error) {
+        console.error('Error fetching stream details:', error);
+        alert('Failed to load video stream.');
+      }
+    }
+
+    // Fetch and load the video on page load
+    fetchStreamDetails();
+  </script>
+</body>
+</html>
