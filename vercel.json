@@ -1,7 +1,13 @@
 {
+  "routes": [
+    {
+      "src": "/api/stream",
+      "dest": "/api/stream.js"
+    }
+  ],
   "functions": {
     "api/stream.js": {
-      "runtime": "nodejs16.x"
+      "runtime": "nodejs18.x"
     }
   }
 }
