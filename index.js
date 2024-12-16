@@ -19,6 +19,11 @@ app.get('/blloan', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'blloan.html'));
 });
 
+// Serve the Live TV page (livetv.html)
+app.get('/livetv', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'livetv.html'));
+});
+
 // API routes
 app.get('/api/timingsByCity', timingsByCity);
 app.get('/api/emergency-balance', emergencyBalance);
