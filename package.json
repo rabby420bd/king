@@ -1,7 +1,7 @@
 {
   "name": "prayer-timings-api",
   "version": "1.0.0",
-  "description": "API for fetching and converting prayer timings.",
+  "description": "API for fetching and converting prayer timings with Bengali numerals.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
