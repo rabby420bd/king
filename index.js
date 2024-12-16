@@ -14,6 +14,11 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// Serve the BL Loan Info page (blloan.html)
+app.get('/blloan', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'blloan.html'));
+});
+
 // API routes
 app.get('/api/timingsByCity', timingsByCity);
 app.get('/api/emergency-balance', emergencyBalance);
