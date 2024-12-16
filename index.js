@@ -1,5 +1,5 @@
 const express = require('express');
-const timingsByCity = require('./api/timingsByCity');
+const timingsByCity = require('./api/timingsByCity'); // Ensure the path matches your file structure
 
 const app = express();
 const port = process.env.PORT || 3000;
