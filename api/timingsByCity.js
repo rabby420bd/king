@@ -1,10 +1,10 @@
 const express = require('express');
-const timingsByCity = require('./api/timingsByCity');
+const timingsByCity = require('./api/timingsByCity'); // Import the API logic
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Define API routes
+// Route for the prayer timings API
 app.get('/api/timingsByCity', timingsByCity);
 
 // Start the server
