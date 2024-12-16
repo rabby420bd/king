@@ -1,14 +1,21 @@
 const express = require('express');
-const timingsByCity = require('./api/timingsByCity'); // Import timingsByCity logic
-const emergencyBalance = require('./api/emergencyBalance'); // Import emergencyBalance logic
+const path = require('path');
+const timingsByCity = require('./api/timingsByCity');
+const emergencyBalance = require('./api/emergencyBalance');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Route for the prayer timings API
-app.get('/api/timingsByCity', timingsByCity);
+// Serve static files from the 'public' folder
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Route for the emergency balance API
+// Serve the homepage (index.html) as the root route
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// API routes
+app.get('/api/timingsByCity', timingsByCity);
 app.get('/api/emergency-balance', emergencyBalance);
 
 // Start the server
