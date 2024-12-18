@@ -24,6 +24,11 @@ app.get('/livetv', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'livetv.html'));
 });
 
+// Serve the Toffe TV page (toffee.html)
+app.get('/toffee', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'toffee.html'));
+});
+
 // API routes
 app.get('/api/timingsByCity', timingsByCity);
 app.get('/api/emergency-balance', emergencyBalance);
