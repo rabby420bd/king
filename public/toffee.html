@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toffee Channels</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .channel {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #ccc;
+      padding: 10px;
+      cursor: pointer;
+    }
+    .channel img {
+      width: 60px;
+      height: 60px;
+      margin-right: 10px;
+      border-radius: 8px;
+    }
+    .channel-info {
+      flex-grow: 1;
+    }
+    video {
+      display: block;
+      width: 100%;
+      max-width: 600px;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    h1 {
+      text-align: center;
+      padding: 10px 0;
+      background-color: #f4f4f4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Toffee Channels</h1>
+  <div id="channels-container"></div>
+  <video id="video-player" controls></video>
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script>
+    const API_URL = "https://raw.githubusercontent.com/byte-capsule/Toffee-Channels-Link-Headers/refs/heads/main/toffee_channel_data.json";
+
+    async function fetchChannels() {
+      try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+
+        const container = document.getElementById('channels-container');
+
+        data.channels.forEach(channel => {
+          const channelDiv = document.createElement('div');
+          channelDiv.className = 'channel';
+
+          const logo = document.createElement('img');
+          logo.src = channel.logo;
+          logo.alt = channel.name;
+
+          const info = document.createElement('div');
+          info.className = 'channel-info';
+
+          const name = document.createElement('h3');
+          name.textContent = channel.name;
+
+          const category = document.createElement('p');
+          category.textContent = `Category: ${channel.category_name}`;
+
+          info.appendChild(name);
+          info.appendChild(category);
+
+          channelDiv.appendChild(logo);
+          channelDiv.appendChild(info);
+
+          // Attach click event to play video
+          channelDiv.addEventListener('click', () => {
+            playVideo(channel.link, channel.headers);
+          });
+
+          container.appendChild(channelDiv);
+        });
+      } catch (error) {
+        console.error('Error fetching channel data:', error);
+      }
+    }
+
+    function playVideo(link, headers) {
+      const videoPlayer = document.getElementById('video-player');
+      const hls = new Hls();
+
+      hls.on(Hls.Events.MEDIA_ATTACHED, () => {
+        console.log("Media attached, starting playback");
+      });
+
+      // Set up headers for the request
+      hls.loadSource(link);
+      hls.config.xhrSetup = function (xhr) {
+        for (const key in headers) {
+          xhr.setRequestHeader(key, headers[key]);
+        }
+      };
+
+      hls.attachMedia(videoPlayer);
+
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        videoPlayer.play().catch(err => console.error("Playback failed:", err));
+      });
+
+      hls.on(Hls.Events.ERROR, function (event, data) {
+        console.error("HLS.js Error:", data);
+      });
+    }
+
+    fetchChannels();
+  </script>
+</body>
+</html>
