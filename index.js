@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 
 // API imports
-const timingsByCity = require('./api/timingsByCity');
+const namaz = require('./api/namaz');
 const emergencyBalance = require('./api/emergencyBalance');
 const nagadUserStatus = require('./api/nagadhalf');
 
@@ -31,7 +31,7 @@ app.get('/toffee', (req, res) => {
 });
 
 // API routes
-app.get('/api/timingsByCity', timingsByCity);
+app.get('/api/namaz', namaz);
 app.get('/api/emergency-balance', emergencyBalance);
 app.get('/api/nagadhalf', nagadUserStatus); // Added route
 
