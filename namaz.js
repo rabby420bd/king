@@ -25,7 +25,7 @@ function convertTo12HourWithBengaliNumerals(time) {
     return `${convertToBengaliNumerals(adjustedHour)}:${convertToBengaliNumerals(minutes)} ${amPm}`;
 }
 
-const timingsByCity = async (req, res) => {
+const namaz = async (req, res) => {
     const city = req.query.city || 'Dhaka';
     const country = req.query.country || 'Bangladesh';
     const method = req.query.method || 4;
@@ -51,4 +51,4 @@ const timingsByCity = async (req, res) => {
     }
 };
 
-module.exports = timingsByCity;
+module.exports = namaz;
