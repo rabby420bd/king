@@ -1,8 +1,10 @@
 const express = require('express');
 const path = require('path');
+
+// API imports
 const timingsByCity = require('./api/timingsByCity');
 const emergencyBalance = require('./api/emergencyBalance');
-const nagadhalf = require('./api/nagadhalf');
+const nagadUserStatus = require('./api/nagadhalf');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -15,17 +17,15 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Serve the BL Loan Info page (blloan.html)
+// Serve other HTML files
 app.get('/blloan', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'blloan.html'));
 });
 
-// Serve the Live TV page (livetv.html)
 app.get('/livetv', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'livetv.html'));
 });
 
-// Serve the Toffe TV page (toffee.html)
 app.get('/toffee', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'toffee.html'));
 });
@@ -33,7 +33,7 @@ app.get('/toffee', (req, res) => {
 // API routes
 app.get('/api/timingsByCity', timingsByCity);
 app.get('/api/emergency-balance', emergencyBalance);
-app.get('/api/nagadhalf', nagadhalf);
+app.get('/api/nagadhalf', nagadUserStatus); // Added route
 
 // Start the server
 app.listen(port, () => {
