@@ -5,6 +5,7 @@ const path = require('path');
 const namaz = require('./api/namaz');
 const emergencyBalance = require('./api/emergencyBalance');
 const nagadUserStatus = require('./api/nagadhalf');
+const tsports = require('./api/tsports'); // Import new API file
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -33,7 +34,8 @@ app.get('/toffee', (req, res) => {
 // API routes
 app.get('/api/namaz', namaz);
 app.get('/api/emergency-balance', emergencyBalance);
-app.get('/api/nagadhalf', nagadUserStatus); // Added route
+app.get('/api/nagadhalf', nagadUserStatus);
+app.get('/api/tsports', tsports); // Added route
 
 // Start the server
 app.listen(port, () => {
