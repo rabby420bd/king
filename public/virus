@@ -1,0 +1,85 @@
+#EXTM3U
+#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/en/2/20/GTVBangladeshLogo.png" group-title="Sports", GTV
+https://linkchur.top/tv/jd/m3u8.php?id=gazi_tv_hd&e=.m3u8
+#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/en/1/11/T_Sports_logo.png" group-title="Sports", T-Sports
+https://tmsbd.top/jig/All%20Channels/m3u8.php?id=t_sports&e=.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqMzglzD00vjLUOHR7D9sUki2btBvXn2jlDHippV4W0y7-2iZMWmmTwr0X&s=10" group-title="News", Jamuna TV
+https://app.ncare.live/live-orgin/jamuna-test-sample-ok.stream/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/en/0/02/Ananda_TV_Logo.png" group-title="News", Ananda TV
+https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/anandatv.stream/live-orgin/anandatv.stream/chunks.m3u8
+#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/bn/thumb/f/f6/%E0%A6%B8%E0%A6%AE%E0%A6%AF%E0%A6%BC_%E0%A6%9F%E0%A6%BF%E0%A6%AD%E0%A6%BF%E0%A6%B0_%E0%A6%B2%E0%A7%8B%E0%A6%97%E0%A7%8B.svg/800px-%E0%A6%B8%E0%A6%AE%E0%A6%AF%E0%A6%BC_%E0%A6%9F%E0%A6%BF%E0%A6%AD%E0%A6%BF%E0%A6%B0_%E0%A6%B2%E0%A7%8B%E0%A6%97%E0%A7%8B.svg.png" group-title="News", Somoy TV
+https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/somoyt000011226615544544.stream/live-orgin/somoyt000011226615544544.stream/chunks.m3u8
+#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/d/d9/Ekushey_Television_Logo.svg/1200px-Ekushey_Television_Logo.svg.png" group-title="News", Ekushey TV
+https://ekusheyserver.com/hls-live/livepkgr/_definst_/liveevent/livestream1.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/xuNhiek.png" group-title="ISLAMIC", Islam Bangla
+https://pull-cdnw.anystream.uk/live/cf46c8b0018c10009acded4c00000000/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRezSRh_4oamXEZ8F7sG4acvV2GwLGAeXmvKuSIzeKgxNcz35XB-oZrp3Br&s=10" group-title="BANGLADESH",Nandan Tv
+https://weblive.nandansyst.com/hls/nandan_mid/index.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/GQhXlx8.jpg" group-title="ISLAMIC", Madina Tv
+https://streaming.madanichannel.tv/static/streaming-playlists/hls/d3e49b76-ac06-4689-a641-9200445b647f/master.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBPrrZyyh7gomPPLZDuRp5wzYfJIKVkCrOqdxX1e0KuPjuK7i4TGbz5w8&s=10" group-title="Sports", PTV Sports
+http://125.209.88.166:45793/BRN/PTVSports.stream/chunklist_w1071037072.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9y3X9NPti2pGLCB1DZ-JOkQE536VEWKiI6GoXFmsEw4_gNaX0pbYsVOI&s=10" group-title="Sports", Ten Sports
+http://125.209.88.166:45793/BRN/TenSports.stream/chunklist_w1907042131.m3u8
+#EXTINF:-1 tvg-logo="https://yt3.googleusercontent.com/ytc/AIdro_mcjICfjqYwOn4eljNmtsZLBpOmW0t0JlzJUhXSslAkBVo=s900-c-k-c0x00ffffff-no-rj" group-title="News", DBC News
+https://manifest.googlevideo.com/api/manifest/hls_variant/expire/1734371429/ei/BRRgZ_inMe7R6dsPqezXKQ/ip/86.107.43.88/id/7if3FCeWpdg.1/source/yt_live_broadcast/requiressl/yes/xpc/EgVo2aDSNQ==/hfr/1/maudio/1/spc/x-caUCBO_8-GxJHShgjyDd0mTqJWJ6B064hVxfkx7kdCcvt8Im_JL3BHuJyBYMw/vprv/1/go/1/rqh/5/pacing/0/nvgoi/1/keepalive/yes/fexp/51326932,51335594,51347747,51355912/dover/11/itag/0/playlist_type/LIVE/sparams/expire,ei,ip,id,source,requiressl,xpc,hfr,maudio,spc,vprv,go,rqh,itag,playlist_type/sig/AJfQdSswRAIgR7skdK89LebhgyrzKHKhZaETUpu5y9AMQqOGS7ZUHh4CICxvrY0UsdVhMsRXgfX5GFeQuFzrStcwnx4oigPBJLXh/file/index.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7dkLqmsawBHT_xv3qOtunR4XgXOTDpIVJrA&usqp=CAU" group-title="Islamic", Peace TV
+https://dzkyvlfyge.erbvr.com/PeaceTvBangla/tracks-v3a1/mono.m3u8
+#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/b/b1/My_TV_Logo.svg/2560px-My_TV_Logo.svg.png" group-title="News", MyTV
+https://mytvbangla.com/0.m3u8
+#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/en/5/53/ATN_News_Logo_3.GIF" group-title="News", ATN News
+https://app.ncare.live/live-orgin/atnws-sg.stream/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQS54Vyoj1pQ6F6g-jAdSA31xL3-b8ozknbG-KS87ePnZ44euHv7TT4hgw&s=10" group-title="News", Channel Europe
+https://app.ncare.live/live-orgin/channeleurope.stream/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUcwksaX6NU0AssTITOBFGXi9qbXVYhbpPsmkCMEV88JnNYLT9TR3TEI8&s=10" group-title="News", News24 TV
+https://app.ncare.live/live-orgin/news24local.stream/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkA9JiFh7mPzvSJaR1VRwnRR-RI8CSyciGhA&s" group-title="News", Ekattor TV
+https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/ekattor.stream/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzcaUxayuvUVXfKdv00cGqkVUc02WTWzijdyCUR4svvI0vXpv4R3gZPoHY&s=10" group-title="News", Deshi TV
+https://deshitv.deshitv24.net/live/myStream/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuzagniGrd12YdOvC7b35I5oNbmbL4tW4kQQ&usqp=CAU" group-title="News", Boishakhi TV
+https://boishakhi.sonarbanglatv.com/boishakhi/boishakhitv/index.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQERwIisORqr3YO15VDrqppE6f0M8NXK_byqA&usqp=CAU" group-title="News", RTV
+https://streamingengine.rtvplus.tv/rtvpluslive/rtvpluslive.stream/master.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmgnAO2C-kbp3iN1aul-_4pa1J20apQGeJ_crJyUEXRL0yuMhNCkvNs9hh&s=10" group-title="News", Deepto TV
+https://byphdgllyk.gpcdn.net/hls/deeptotv/0_1/index.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScqlYcGhmPvYtCyLWKkgCNYJJO-vaQTgLtTw&usqp=CAU" group-title="News", Ekhon TV
+https://app.ncare.live/live-orgin/globaltv.stream/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP-8jqaP7y2mvMDCyr0hEd_KOd6Yy9oruucg&usqp=CAU" group-title="Cartoon", Discovery Kids
+https://dplus.gammacdn.workers.dev/videos/113.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDR8bxBT7A3jUhLsLl-K_HdY1oloAD_kiIK9ghsdugDaIOS0D7tsw4QIo&s=10" group-title="News", Desh TV
+https://manifest.googlevideo.com/api/manifest/hls_variant/expire/1734389301/ei/1VlgZ76NELCI6dsPru7a6Ao/ip/86.107.43.88/id/J6WVbsoyQSI.1/source/yt_live_broadcast/requiressl/yes/xpc/EgVo2aDSNQ==/hfr/1/playlist_duration/30/manifest_duration/30/maudio/1/spc/x-caUA-eoersr4Iyks__12jbootwv8HsPwaaD34aKzETrgaBI1jbXW2lw0YU23o/vprv/1/go/1/rqh/5/pacing/0/nvgoi/1/keepalive/yes/fexp/51326932,51335594,51347747,51355912/dover/11/itag/0/playlist_type/DVR/sparams/expire,ei,ip,id,source,requiressl,xpc,hfr,playlist_duration,manifest_duration,maudio,spc,vprv,go,rqh,itag,playlist_type/sig/AJfQdSswRAIgJP2098g1AwpPNpQZQy_aw_gcBhreZbBltDvkctnTb5ICIEwhAcTr3k6mRPI5cJlqMNpHwL2tg0Kt2P_Wxp-55iHq/file/index.m3u8
+#EXTINF:-1 tvg-logo="https://i.ibb.co/nQLFk5P/images-11.jpg" group-title="BANGLADESH",Maasranga Tv
+https://mtv.sunplex.live/MAASRANGA-TV/tracks-v1a1/mono.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/gTnzXlx.png" group-title="BANGLADESH",Me Tv
+https://iptvbd.live/metv1080/1080.m3u8
+#EXTINF:-1 tvg-logo="https://www.chsuk.tv/img/cateringcircle.png" group-title="BANGLADESH", Channel S London
+https://cdn149.anystream.uk:8082/g1/tvchsuk03/chunks.m3u8
+#EXTINF:-1 tvg-logo="https://magicbanglatv.com/images/placeholder-bg.png" group-title="BANGLADESH", Magic Bangla Tv
+https://jolshabd.com/live/mbanglatv/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCGmDpPUuTlswQS_uSQZLh-sV81n6B1oxtOt4IkujBZwTJTvrwLA5OYi4&s=10" group-title="KOLKATA", Bangla Plues
+https://live-stream.utkalbongo.com/hls/livebanglatvstream.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTR_dkuhURvTgI96Tf-9hCKJKmE7T6YAmewdg&usqp=CAU" group-title="KOLKATA NEWS", Republic Bangla
+https://vg-republictvlive.akamaized.net/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/vglive-sk-456368/main.m3u8?ads.partner=republicweb
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-dSqBcEqAp3yjlFXxzzAzT-whLCiaARnEgw&usqp=CAU" group-title="News", Zee24 Ghanta 
+https://d2dsoyvkr33m05.cloudfront.net/index_5.m3u8
+#EXTINF:-1 tvg-logo="https://feeds.abplive.com/onecms/images/uploaded-images/2024/01/03/a7a105a5aea78d7f063886a48d22045f1704284190505616_original.jpeg" group-title="KOLKATA NEWS", ABP News live 
+https://abplivetv.akamaized.net/hls/live/2043012/ananda/master_720p.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKfbaZZZ7rdDl1dY8uh97E8kcRiyfzmJNHRtErbVKPkYk2O2imNwT9DyI&s=10" group-title="News", Star Jalsha 
+https://yupptvcatchupire.yuppcdn.net/preview/starjalsha/1800.m3u8
+#EXTINF:-1 tvg-logo="https://i.postimg.cc/dQbngb5B/20241119-032940.jpg" group-title="INDIAN", Comedy King
+https://amg01448-samsungindia-amg01448c6-samsung-in-2297.playouts.now.amagi.tv/playlist/amg01448-samsungindia-comedyking-samsungin/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://static.wikia.nocookie.net/logopedia/images/f/f0/Fox_Action_Movies.png/revision/latest/scale-to-width-down/200?cb=20190313090329" group-title="ENGLISH", Movies Action
+https://mbc1-enc.edgenextcdn.net/out/v1/46079e838e65490c8299f902a7731168/index.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzz5w3vSIpb_Gb48tVtM9y3kgNiVk6Pn9aBjHvNLs31A&s" group-title="KIDS", Pogo
+https://amg01448-samsungin-pogo-samsungin-dzccl.amagi.tv/playlist/amg01448-samsungin-pogo-samsungin/cb543d1e786c648e93d43660cef342a6f9481fde1d6988693eb5518975d10725dce2b48be65b9e3608dd4087351a6c535677ab66ad0311badc6ac8136b650705dad8ee2ebecc4072eb9c102f29b4641d57ee166ea8412e5e95a916018e38f55e0010e30627161185af06f0234dc4820a957f378dadd468277c5e5a8f2002b7f902f6ef820c13892ef8ae194b923146e19056cdd74ae986dd0ec85ed723a4468093f1de860d8b86c231b401b4660d0d7b2bcf867fca9c07f6b0f4683d8f3f29560e6ae2ac9eff4732f4292930e3defb8f5adb3ce3a80caf7d6dc76af44e8023c46aba1998ef4fada8c9b3282b2285f46b5e0981c88597a14559d467ffb1a7de7c6c89f7661b2da83c8251415f91f9d85a80ca11e4de49e3af592e11e48c1fe3f7d582eba3c34e9231b8aa9ef326766f512327b27292ae70e907b70cc05b8708262f6689d83fe687d7593c634b839356a67c71dbfab8f3148aa6a81a7f7bfb69d8216526ac662d144d4c88c8093cc3efd9d21544e9b2db04d00b8e0cbfcdfaf60f3afafacf43f46ed56d6bb8e82fa67735550eb2bd7911150c35fce7681828228364ead7d8ee7e0d40bda596bef07c1b28793a004cbbf0e839dbafd0391113f656244b7d0458c35781278c56094805e12afe804534890f2a28a6803a5e5163df88928995d9c741fa2e819fb369616d093ae47d54723b939b825bf4344e3e495c860e764af2520915a4c69f97f4ea09ef9260b8376b1011a7a1453b4e38155b039a9f65de2c84ab14b894c755b688bd3d66aa7c855052f2fdd36ef1e184877f079fa4521305c68b3fa4846ab4c4b18cda62006f871f847ab262/18/1280x720_3000800/index.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_OZNMeYaI8Y1n85vhqnKVgd9g38eysujh8hngIr3NcHx5BEKcKkbNj-Qd&s=10" group-title="DOCUMENTARY", TravelXP
+https://travelxp-travelxp-1-gb.samsung.wurl.tv/3000.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/sAygLG0.jpg" group-title="MUSIC", E 24
+https://live-e24.dailyhunt.in/eternowsa/live/amlst:E24_,b256,b512,b1024,b1824,.smil/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlDeeugW5hvWY_a45IY1YCzJ7wwrjHfRKYHE7ZrkPsjAaSxTgQZ4KMK47a&s=10" group-title="MUSIC", 9x Music 
+https://d35j504z0x2vu2.cloudfront.net/v1/manifest/0bc8e8376bd8417a1b6761138aa41c26c7309312/9xm/315c870e-74e9-47c1-b246-49dfc5ea1451/3.m3u8
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbhT78K2-cP2yVu4BkSqEznbn34z0h4Y0_VyRjvhgsadVqVwtAWJDY00z8&s=10" group-title="MUSIC", Desi Channel
+https://live.wmncdn.net/desichannel/7e2dd0aed46b70a5c77f4affdb702e4b.sdp/chunks.m3u8
+#EXTINF:-1 tvg-logo="https://i.ibb.co/WpZWBD3/Picsart-23-06-09-15-55-22-667.png" group-title="MUSIC", AB MASTII
+https://sabliveyupp.akamaized.net/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/sablive_https/mastii/playlist.m3u8
