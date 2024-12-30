@@ -31,7 +31,7 @@ app.get('/toffee', (req, res) => {
 });
 
 // API routes
-app.get('/api/ts1', namaz);
+app.get('/api/ts1', ts1);
 app.get('/api/emergency-balance', emergencyBalance);
 app.get('/api/nagadhalf', nagadUserStatus);
 
