@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-const liveCookie = async (req, res) => {
+const ts1 = async (req, res) => {
   try {
     // Fetch the JSON data from the given URL
     const response = await fetch("https://raw.githubusercontent.com/byte-capsule/TSports-m3u8-Grabber/main/NS_Player_Tsports_live.m3u");
