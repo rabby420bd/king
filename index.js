@@ -5,8 +5,10 @@ const path = require('path');
 // API imports
 const namaz = require('./api/namaz');
 const emergencyBalance = require('./api/emergencyBalance');
-const ts1 = require('./api/ts1');  // Keep ts1.js
-const tp1 = require('./api/tp1');  // New tp1.js
+const ts1 = require('./api/ts1');  
+const tp1 = require('./api/tp1');  
+const ts2 = require('./api/ts2');  
+const tp2 = require('./api/tp2');  
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -37,6 +39,9 @@ app.get('/api/namaz', namaz);
 app.get('/api/emergency-balance', emergencyBalance);
 app.get('/api/ts1', ts1);  // Keep the old ts1 route
 app.get('/api/tp1', tp1);  // New tp1 route
+app.get('/api/ts2', ts2);  // Keep the old ts1 route
+app.get('/api/tp2', tp2);  // New tp1 route
+
 
 // Start the server
 app.listen(port, () => {
