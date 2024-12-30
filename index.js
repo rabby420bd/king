@@ -18,22 +18,28 @@ app.get('/', (req, res) => {
 });
 
 // Serve other HTML files
-app.get('/blloan', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'blloan.html'));
-});
-
-app.get('/livetv', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'livetv.html'));
-});
-
-app.get('/toffee', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'toffee.html'));
+const staticPages = ['blloan', 'livetv', 'toffee'];
+staticPages.forEach((page) => {
+    app.get(`/${page}`, (req, res) => {
+        res.sendFile(path.join(__dirname, 'public', `${page}.html`));
+    });
 });
 
 // API routes
 app.get('/api/ts1', ts1);
 app.get('/api/emergency-balance', emergencyBalance);
 app.get('/api/namaz', namaz);
+
+// Global error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Internal Server Error');
+});
+
+// Handle 404 for unmatched routes
+app.use((req, res) => {
+    res.status(404).send('Page not found');
+});
 
 // Start the server
 app.listen(port, () => {
