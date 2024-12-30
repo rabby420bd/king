@@ -1,8 +1,8 @@
 #EXTM3U
 #EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/en/2/20/GTVBangladeshLogo.png" group-title="Sports", GTV
 https://kingicharles.vercel.app/live/gtv.m3u8
-#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/en/1/11/T_Sports_logo.png" group-title="Sports", T-Sports
-https://kingicharles.vercel.app/live/tsports.m3u8
+#EXTINF:-1 tvg-logo="https://tds-images.thedailystar.net/sites/default/files/styles/big_202/public/images/2024/11/12/bpl2025.jpg" group-title="Sports", T-Sports
+https://live-cdn.tsports.com/live-02/index.m3u8?|cookie=Edge-Cache-Cookie=URLPrefix=aHR0cHM6Ly9saXZlLWNkbi50c3BvcnRzLmNvbS8:Expires=1735594722:KeyName=tsports-ed25519-01:Signature=dl5WbufDs7NLBYnCMLdUK1bFqXLR6V00g49jcvVnZXsxfZAEJtonT-Xf9-KQNvQo7BmlWYU_zaBTfJ58cQW2AA
 #EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqMzglzD00vjLUOHR7D9sUki2btBvXn2jlDHippV4W0y7-2iZMWmmTwr0X&s=10" group-title="News", Jamuna TV
 https://app.ncare.live/live-orgin/jamuna-test-sample-ok.stream/playlist.m3u8
 #EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/en/0/02/Ananda_TV_Logo.png" group-title="News", Ananda TV
