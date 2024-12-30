@@ -1,4 +1,4 @@
 #EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000
-https://tmsbd.top/jig/All%20Channels/m3u8.php?id=t_sports&e=.m3u8
+https://live-cdn.tsports.com/live-02/index.m3u8?|cookie=Edge-Cache-Cookie=URLPrefix=aHR0cHM6Ly9saXZlLWNkbi50c3BvcnRzLmNvbS8:Expires=1735594722:KeyName=tsports-ed25519-01:Signature=dl5WbufDs7NLBYnCMLdUK1bFqXLR6V00g49jcvVnZXsxfZAEJtonT-Xf9-KQNvQo7BmlWYU_zaBTfJ58cQW2AA
