@@ -4,7 +4,7 @@ const path = require('path');
 // API imports
 const ts1 = require('./api/ts1');
 const emergencyBalance = require('./api/emergencyBalance');
-const nagadUserStatus = require('./api/nagadhalf');
+const namaz = require('./api/namaz');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -33,7 +33,7 @@ app.get('/toffee', (req, res) => {
 // API routes
 app.get('/api/ts1', ts1);
 app.get('/api/emergency-balance', emergencyBalance);
-app.get('/api/nagadhalf', nagadUserStatus);
+app.get('/api/namaz', namaz);
 
 // Start the server
 app.listen(port, () => {
