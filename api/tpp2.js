@@ -14,7 +14,10 @@ const headers = {
 const fetchM3U8 = async (req, res) => {
   try {
     // Step 1: Fetch the JSON data to get the M3U8 link
+    console.log('Fetching JSON data from API...');
     const apiResponse = await axios.get(apiUrl, { headers });
+    console.log('API Response:', apiResponse.data); // Debugging: Log the full API response
+
     const streamUrl = apiResponse.data?.streamUrl;
 
     if (!streamUrl) {
@@ -25,15 +28,16 @@ const fetchM3U8 = async (req, res) => {
     console.log('Stream URL:', streamUrl); // Debugging: Log the extracted streamUrl
 
     // Step 2: Fetch the M3U8 content from the stream URL
+    console.log('Fetching M3U8 content...');
     const m3u8Response = await axios.get(streamUrl, { headers });
 
     // Step 3: Send the M3U8 content as the response
     res.setHeader('Content-Type', 'application/vnd.apple.mpegurl');
     res.send(m3u8Response.data);
   } catch (error) {
-    // Handle any errors and send a response
-    console.error('Error fetching M3U8:', error.message);
-    res.status(500).send('Error fetching M3U8 data');
+    // Enhanced error handling
+    console.error('Error details:', error.response?.data || error.message);
+    res.status(500).send(`Error fetching M3U8 data: ${error.message}`);
   }
 };
 
