@@ -1,27 +1,32 @@
 const axios = require('axios');
 
-// Define the URL for the M3U8 file
-const url = 'https://kingicharles.vercel.app/api/tp2';
+// Define the API endpoint to fetch the JSON data
+const apiUrl = 'https://kingicharles.vercel.app/api/ts2';
 
-// Define the custom headers
+// Define the custom headers for both requests
 const headers = {
   'Referrer': 'https://live-cdn.tsports.com',
   'Origin': 'https://live-cdn.tsports.com',
   'User-Agent': 'Tsports (Linux; Telegram:https://t.me/J_9X_H_9X_N) Github:https://github.com/byte-capsule AndroidXMedia3/1.1.1/64103898/4d2ec9b8c7534adc'
 };
 
-// Function to fetch the redirected M3U8 file with headers
+// Function to fetch the M3U8 link from the JSON API and then fetch the M3U8 content
 const fetchM3U8 = async (req, res) => {
   try {
-    // Make a GET request to fetch the redirected M3U8 content
-    const response = await axios.get(url, {
-      headers,
-      maxRedirects: 5 // Follow up to 5 redirects
-    });
+    // Step 1: Fetch the JSON data to get the M3U8 link
+    const apiResponse = await axios.get(apiUrl, { headers });
+    const streamUrl = apiResponse.data?.data?.streamUrl;
 
-    // Send the M3U8 content as the response
+    if (!streamUrl) {
+      return res.status(400).send('M3U8 URL not found in API response');
+    }
+
+    // Step 2: Fetch the M3U8 content from the stream URL
+    const m3u8Response = await axios.get(streamUrl, { headers });
+
+    // Step 3: Send the M3U8 content as the response
     res.setHeader('Content-Type', 'application/vnd.apple.mpegurl');
-    res.send(response.data);
+    res.send(m3u8Response.data);
   } catch (error) {
     // Handle any errors and send a response
     console.error('Error fetching M3U8:', error.message);
