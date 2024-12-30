@@ -1,10 +1,4 @@
 #EXTM3U
 #EXT-X-VERSION:3
-#EXT-X-TARGETDURATION:10
-#EXT-X-MEDIA-SEQUENCE:0
-
-# Single .ts file for testing
-#EXTINF:10,
-https://edge01.iptv.digijadoo.net/live/t_sports/l_10_23581528_1371.ts?expires=1735755844&md5=8_7zEjGaqvNg1-nPHcKdpA&user=8333f5cef8e441a0abd75ae8344d39d7
-
-#EXT-X-ENDLIST
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2560000
+https://www.its-ferdos-alom.top/tsports/live.php?id=2832a8a6319e&e=.m3u8
