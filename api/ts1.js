@@ -5,19 +5,18 @@ const ts1 = async (req, res) => {
     // Fetch the JSON data from the given URL
     const response = await fetch("https://raw.githubusercontent.com/byte-capsule/TSports-m3u8-Grabber/main/NS_Player_Tsports_live.m3u");
 
-    // Check if the response is OK
+    // Check if the response is successful
     if (!response.ok) {
       return res.status(500).json({ error: "Failed to fetch data from the external source" });
     }
 
+    // Parse the JSON data
     const data = await response.json();
 
-    // Ensure the data array and cookie are present
+    // Validate the data structure and extract the cookie
     if (!Array.isArray(data) || !data[0]?.cookie) {
       return res.status(404).json({ error: "Cookie not found in the data" });
     }
-
-    // Extract the cookie
     const cookie = data[0].cookie;
 
     // Construct the m3u8 URL
