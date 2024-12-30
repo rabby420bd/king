@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 // Define the URL for the M3U8 file
-const url = 'https://kingicharles.vercel.app/api/tpp2';
+const url = 'https://kingicharles.vercel.app/api/tp2';
 
 // Define the custom headers
 const headers = {
