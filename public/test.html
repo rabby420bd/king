@@ -3,96 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Player</title>
+    <title>Custom Video Player</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
         }
-        video {
+        #video-container {
             width: 80%;
             max-width: 800px;
-            margin-top: 20px;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
         }
-        .video-details {
-            margin-top: 20px;
+        video {
+            width: 100%;
+            height: auto;
         }
     </style>
 </head>
 <body>
-
-<h1>Live Video Player</h1>
-
-<div id="video-container">
-    <video id="video-player" controls>
-        <source id="video-source" type="application/x-mpegURL">
-        Your browser does not support the video tag.
-    </video>
-    <div class="video-details">
-        <h2 id="channel-name"></h2>
-        <p id="channel-owner"></p>
+    <div id="video-container">
+        <video id="video" controls></video>
     </div>
-</div>
 
-<script>
-    // URL of the JSON API
-    const apiUrl = "https://raw.githubusercontent.com/byte-capsule/TSports-m3u8-Grabber/main/TSports_m3u8_headers.Json";
+    <script>
+        async function initializePlayer() {
+            const apiUrl = "https://raw.githubusercontent.com/byte-capsule/TSports-m3u8-Grabber/main/NS_Player_Tsports_live.m3u";
 
-    // Function to fetch the data and set up the video player
-    async function setupVideoPlayer() {
-        try {
-            // Fetch the JSON data
-            const response = await fetch(apiUrl);
-            const data = await response.json();
+            try {
+                // Fetch JSON data
+                const response = await fetch(apiUrl);
+                const data = await response.json();
 
-            // Get the first channel's video link and headers
-            const channel = data.channels[0];
-            const videoLink = channel.link;
-            const headers = channel.headers;
+                // Extract necessary data
+                const videoUrl = data[0].link;
+                const headers = {
+                    "Origin": data[0].origin,
+                    "Referer": data[0].referrer,
+                    "User-Agent": data[0].userAgent,
+                    "Cookie": data[0].cookie
+                };
 
-            // Set video source URL
-            const videoSource = document.getElementById("video-source");
-            videoSource.src = videoLink;
+                const video = document.getElementById("video");
 
-            // Set video details
-            document.getElementById("channel-name").innerText = channel.name;
-            document.getElementById("channel-owner").innerText = `Owner: ${data.owner}`;
+                // Check if HLS is supported
+                if (Hls.isSupported()) {
+                    const hls = new Hls({
+                        xhrSetup: function(xhr, url) {
+                            xhr.setRequestHeader("Origin", headers["Origin"]);
+                            xhr.setRequestHeader("Referer", headers["Referer"]);
+                            xhr.setRequestHeader("User-Agent", headers["User-Agent"]);
+                            xhr.setRequestHeader("Cookie", headers["Cookie"]);
+                        }
+                    });
+                    hls.loadSource(videoUrl);
+                    hls.attachMedia(video);
 
-            // Set up the video player to use the correct headers
-            const videoPlayer = document.getElementById("video-player");
-
-            // Add custom headers for the video request
-            const init = {
-                method: "GET",
-                headers: new Headers({
-                    "Cookie": headers.Cookie,
-                    "Host": headers.Host,
-                    "User-Agent": headers["User-agent"]
-                })
-            };
-
-            // Set the video player's source with custom headers
-            fetch(videoLink, init)
-                .then(() => {
-                    // If the video is available, start the player
-                    videoPlayer.load();
-                    videoPlayer.play();
-                })
-                .catch((error) => {
-                    console.error("Error loading video:", error);
-                    alert("Failed to load video.");
-                });
-
-        } catch (error) {
-            console.error("Error fetching JSON data:", error);
-            alert("Failed to load channel data.");
+                    hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                        video.play();
+                    });
+                } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+                    // Native HLS support for Safari
+                    video.src = videoUrl;
+                    video.addEventListener("loadedmetadata", () => {
+                        video.play();
+                    });
+                } else {
+                    alert("Your browser does not support HLS playback.");
+                }
+            } catch (error) {
+                console.error("Error initializing the video player:", error);
+            }
         }
-    }
 
-    // Call the setup function to initialize the video player
-    setupVideoPlayer();
-</script>
-
+        initializePlayer();
+    </script>
 </body>
 </html>
