@@ -2,7 +2,7 @@ const axios = require('axios');
 
 const fetchM3U8 = async (req, res) => {
     try {
-        // Step 1: Fetch JSON to get streamUrl
+        // Step 1: Fetch JSON to get the streamUrl
         const apiResponse = await axios.get('https://kingicharles.vercel.app/api/ts2', {
             headers: {
                 'Referrer': 'https://live-cdn.tsports.com',
@@ -14,7 +14,7 @@ const fetchM3U8 = async (req, res) => {
         const streamUrl = apiResponse.data?.streamUrl;
 
         if (!streamUrl) {
-            console.error('Stream URL not found');
+            console.error('Stream URL not found in API response');
             return res.status(400).send('Stream URL not found in API response');
         }
 
@@ -34,7 +34,11 @@ const fetchM3U8 = async (req, res) => {
         res.setHeader('Content-Type', 'application/vnd.apple.mpegurl');
         m3u8Response.data.pipe(res);
     } catch (error) {
-        console.error('Error fetching M3U8:', error.message, error.response?.status);
+        console.error('Error fetching M3U8:', error.message);
+        if (error.response) {
+            console.error('Response status:', error.response.status);
+            console.error('Response data:', error.response.data);
+        }
         res.status(500).send(`Error fetching M3U8 data: ${error.message}`);
     }
 };
