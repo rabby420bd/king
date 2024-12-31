@@ -7,7 +7,7 @@ const fetchM3U8 = async (req, res) => {
             headers: {
                 'Referrer': 'https://live-cdn.tsports.com',
                 'Origin': 'https://live-cdn.tsports.com',
-                'User-Agent': 'Tsports (Linux; Telegram:https://t.me/J_9X_H_9X_N) Github:https://github.com/byte-capsule AndroidXMedia3/1.1.1/64103898/4d2ec9b8c7534adc'
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
             }
         });
 
@@ -20,14 +20,21 @@ const fetchM3U8 = async (req, res) => {
 
         console.log('Stream URL:', streamUrl);
 
+        // Extract cookie if available
+        const [url, cookieParam] = streamUrl.split('|cookie=');
+        const cookie = cookieParam ? cookieParam.split('=')[1] : '';
+
         // Step 2: Fetch M3U8 file from the streamUrl
-        const m3u8Response = await axios.get(streamUrl, {
+        const m3u8Response = await axios.get(url, {
             headers: {
                 'Referrer': 'https://live-cdn.tsports.com',
                 'Origin': 'https://live-cdn.tsports.com',
-                'User-Agent': 'Tsports (Linux; Telegram:https://t.me/J_9X_H_9X_N) Github:https://github.com/byte-capsule AndroidXMedia3/1.1.1/64103898/4d2ec9b8c7534adc'
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                'Accept': '*/*',
+                'Connection': 'keep-alive',
+                'Cookie': `Edge-Cache-Cookie=${cookie}`
             },
-            responseType: 'stream' // Stream response for efficiency
+            responseType: 'stream'
         });
 
         // Step 3: Set appropriate content type and stream the response
