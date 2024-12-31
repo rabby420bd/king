@@ -35,6 +35,12 @@
             color: red;
             display: none;
         }
+
+        #stream-link {
+            margin-top: 20px;
+            color: green;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -42,6 +48,7 @@
         <h1>Live Video Stream</h1>
         <video id="video" width="100%" height="auto" controls></video>
         <div id="error-message" style="color: red; display: none;"></div>
+        <div id="stream-link" style="display: none;"></div> <!-- For displaying the m3u8 link -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -65,6 +72,9 @@
                     return;
                 }
 
+                // Display the m3u8 link
+                displayStreamLink(streamUrl);
+
                 // Fetch headers from the second API
                 const headersResponse = await fetch(apiUrl2);
                 if (!headersResponse.ok) {
@@ -83,6 +93,13 @@
                 console.error('Error fetching stream data: ', error);  // Log the error for debugging
                 showError('Error fetching stream data: ' + error.message);
             }
+        }
+
+        // Display the m3u8 link
+        function displayStreamLink(streamUrl) {
+            const streamLinkElement = document.getElementById('stream-link');
+            streamLinkElement.textContent = `Stream URL: ${streamUrl}`;
+            streamLinkElement.style.display = 'block';
         }
 
         // Play video using HLS.js
