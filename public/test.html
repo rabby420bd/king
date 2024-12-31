@@ -54,6 +54,9 @@
         async function fetchStreamData() {
             try {
                 const response = await fetch(apiUrl1);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
                 const data = await response.json();
                 const streamUrl = data.streamUrl;
 
@@ -64,6 +67,9 @@
 
                 // Fetch headers from the second API
                 const headersResponse = await fetch(apiUrl2);
+                if (!headersResponse.ok) {
+                    throw new Error(`HTTP error! status: ${headersResponse.status}`);
+                }
                 const headersData = await headersResponse.json();
                 const headers = {
                     Origin: headersData[0].origin,
@@ -74,6 +80,7 @@
                 playVideo(streamUrl, headers);
 
             } catch (error) {
+                console.error('Error fetching stream data: ', error);  // Log the error for debugging
                 showError('Error fetching stream data: ' + error.message);
             }
         }
@@ -100,6 +107,7 @@
                 });
 
                 hls.on(Hls.Events.ERROR, function(event, data) {
+                    console.error('HLS.js error: ', data);  // Log HLS.js error for debugging
                     showError('HLS.js error: ' + data.details);
                 });
 
