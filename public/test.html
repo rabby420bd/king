@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Video Stream</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            text-align: center;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        video {
+            margin-top: 20px;
+            border: 2px solid #000;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2em;
+        }
+
+        #error-message {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Live Video Stream</h1>
+        <video id="video" width="100%" height="auto" controls></video>
+        <div id="error-message" style="color: red; display: none;"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+        // URLs for the APIs
+        const apiUrl1 = "https://kingicharles.onrender.com/api/ts2";
+        const apiUrl2 = "https://raw.githubusercontent.com/byte-capsule/TSports-m3u8-Grabber/main/NS_Player_Tsports_live.m3u";
+
+        // Fetching stream URL and headers info from the first API
+        async function fetchStreamData() {
+            try {
+                const response = await fetch(apiUrl1);
+                const data = await response.json();
+                const streamUrl = data.streamUrl;
+
+                if (!streamUrl) {
+                    showError('No stream URL found in the response.');
+                    return;
+                }
+
+                // Fetch headers from the second API
+                const headersResponse = await fetch(apiUrl2);
+                const headersData = await headersResponse.json();
+                const headers = {
+                    Origin: headersData[0].origin,
+                    Referrer: headersData[0].referrer,
+                    UserAgent: headersData[0].userAgent
+                };
+
+                playVideo(streamUrl, headers);
+
+            } catch (error) {
+                showError('Error fetching stream data: ' + error.message);
+            }
+        }
+
+        // Play video using HLS.js
+        function playVideo(streamUrl, headers) {
+            const videoElement = document.getElementById('video');
+
+            if (Hls.isSupported()) {
+                const hls = new Hls({
+                    xhrSetup: function(xhr, url) {
+                        // Set headers before the video request
+                        for (let key in headers) {
+                            xhr.setRequestHeader(key, headers[key]);
+                        }
+                    }
+                });
+
+                hls.loadSource(streamUrl);
+                hls.attachMedia(videoElement);
+
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    videoElement.play();
+                });
+
+                hls.on(Hls.Events.ERROR, function(event, data) {
+                    showError('HLS.js error: ' + data.details);
+                });
+
+            } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
+                // Fallback for browsers that support m3u8 natively (like Safari)
+                videoElement.src = streamUrl;
+                videoElement.play();
+            } else {
+                showError('This browser does not support video playback.');
+            }
+        }
+
+        // Display error message
+        function showError(message) {
+            const errorMessageElement = document.getElementById('error-message');
+            errorMessageElement.textContent = message;
+            errorMessageElement.style.display = 'block';
+        }
+
+        // Initiate the video fetching process
+        fetchStreamData();
+    </script>
+</body>
+</html>
