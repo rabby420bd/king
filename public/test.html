@@ -42,27 +42,14 @@
                 const response = await fetch(apiUrl);
                 const data = await response.json();
 
-                // Extract necessary data
-                const videoUrl = data[0].link;
-                const headers = {
-                    "Origin": data[0].origin,
-                    "Referer": data[0].referrer,
-                    "User-Agent": data[0].userAgent,
-                    "Cookie": data[0].cookie
-                };
+                // Construct the final URL with cookie
+                const videoUrl = `${data[0].link}?|cookie=${encodeURIComponent(data[0].cookie)}`;
 
                 const video = document.getElementById("video");
 
                 // Check if HLS is supported
                 if (Hls.isSupported()) {
-                    const hls = new Hls({
-                        xhrSetup: function(xhr, url) {
-                            xhr.setRequestHeader("Origin", headers["Origin"]);
-                            xhr.setRequestHeader("Referer", headers["Referer"]);
-                            xhr.setRequestHeader("User-Agent", headers["User-Agent"]);
-                            xhr.setRequestHeader("Cookie", headers["Cookie"]);
-                        }
-                    });
+                    const hls = new Hls();
                     hls.loadSource(videoUrl);
                     hls.attachMedia(video);
 
