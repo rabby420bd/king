@@ -48,49 +48,51 @@
         <h1>Live Video Stream</h1>
         <video id="video" width="100%" height="auto" controls></video>
         <div id="error-message" style="color: red; display: none;"></div>
-        <div id="stream-link" style="display: none;"></div> <!-- For displaying the m3u8 link -->
+        <div id="stream-link" style="display: none;"></div> <!-- Display m3u8 link -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script>
-        // URLs for the APIs
+        // API URLs
         const apiUrl1 = "https://kingicharles.onrender.com/api/ts2";
         const apiUrl2 = "https://raw.githubusercontent.com/byte-capsule/TSports-m3u8-Grabber/main/NS_Player_Tsports_live.m3u";
 
-        // Fetching stream URL and headers info from the first API
+        // Fetch the stream URL and headers
         async function fetchStreamData() {
             try {
-                const response = await fetch(apiUrl1);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                // Fetch streamUrl from API 1
+                const streamResponse = await fetch(apiUrl1);
+                if (!streamResponse.ok) {
+                    throw new Error(`API 1 error! status: ${streamResponse.status}`);
                 }
-                const data = await response.json();
-                const streamUrl = data.streamUrl;
+                const streamData = await streamResponse.json();
+                const streamUrl = streamData.streamUrl;
 
                 if (!streamUrl) {
-                    showError('No stream URL found in the response.');
+                    showError('No stream URL found in the API 1 response.');
                     return;
                 }
 
-                // Display the m3u8 link
-                displayStreamLink(streamUrl);
-
-                // Fetch headers from the second API
+                // Fetch headers from API 2
                 const headersResponse = await fetch(apiUrl2);
                 if (!headersResponse.ok) {
-                    throw new Error(`HTTP error! status: ${headersResponse.status}`);
+                    throw new Error(`API 2 error! status: ${headersResponse.status}`);
                 }
                 const headersData = await headersResponse.json();
                 const headers = {
                     Origin: headersData[0].origin,
                     Referrer: headersData[0].referrer,
-                    UserAgent: headersData[0].userAgent
+                    'User-Agent': headersData[0].userAgent
                 };
 
+                // Display the m3u8 link
+                displayStreamLink(streamUrl);
+
+                // Play the video
                 playVideo(streamUrl, headers);
 
             } catch (error) {
-                console.error('Error fetching stream data: ', error);  // Log the error for debugging
+                console.error('Error fetching stream data: ', error); // Log the error for debugging
                 showError('Error fetching stream data: ' + error.message);
             }
         }
@@ -102,14 +104,14 @@
             streamLinkElement.style.display = 'block';
         }
 
-        // Play video using HLS.js
+        // Play video using HLS.js with headers
         function playVideo(streamUrl, headers) {
             const videoElement = document.getElementById('video');
 
             if (Hls.isSupported()) {
                 const hls = new Hls({
                     xhrSetup: function(xhr, url) {
-                        // Set headers before the video request
+                        // Set headers before making the video request
                         for (let key in headers) {
                             xhr.setRequestHeader(key, headers[key]);
                         }
@@ -124,7 +126,7 @@
                 });
 
                 hls.on(Hls.Events.ERROR, function(event, data) {
-                    console.error('HLS.js error: ', data);  // Log HLS.js error for debugging
+                    console.error('HLS.js error: ', data); // Log HLS.js error for debugging
                     showError('HLS.js error: ' + data.details);
                 });
 
@@ -144,7 +146,7 @@
             errorMessageElement.style.display = 'block';
         }
 
-        // Initiate the video fetching process
+        // Initiate the process
         fetchStreamData();
     </script>
 </body>
