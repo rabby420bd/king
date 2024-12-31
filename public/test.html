@@ -3,151 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Video Stream</title>
+    <title>Video Player</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f4;
-        }
-
-        .container {
             text-align: center;
+            padding: 20px;
+        }
+        video {
             width: 80%;
             max-width: 800px;
-        }
-
-        video {
             margin-top: 20px;
-            border: 2px solid #000;
         }
-
-        h1 {
-            color: #333;
-            font-size: 2em;
-        }
-
-        #error-message {
-            color: red;
-            display: none;
-        }
-
-        #stream-link {
+        .video-details {
             margin-top: 20px;
-            color: green;
-            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Live Video Stream</h1>
-        <video id="video" width="100%" height="auto" controls></video>
-        <div id="error-message" style="color: red; display: none;"></div>
-        <div id="stream-link" style="display: none;"></div> <!-- Display m3u8 link -->
+
+<h1>Live Video Player</h1>
+
+<div id="video-container">
+    <video id="video-player" controls>
+        <source id="video-source" type="application/x-mpegURL">
+        Your browser does not support the video tag.
+    </video>
+    <div class="video-details">
+        <h2 id="channel-name"></h2>
+        <p id="channel-owner"></p>
     </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script>
-        // API URLs
-        const apiUrl1 = "https://kingicharles.onrender.com/api/ts2";
-        const apiUrl2 = "https://raw.githubusercontent.com/byte-capsule/TSports-m3u8-Grabber/main/NS_Player_Tsports_live.m3u";
+<script>
+    // URL of the JSON API
+    const apiUrl = "https://raw.githubusercontent.com/byte-capsule/TSports-m3u8-Grabber/main/TSports_m3u8_headers.Json";
 
-        // Fetch the stream URL and headers
-        async function fetchStreamData() {
-            try {
-                // Fetch streamUrl from API 1
-                const streamResponse = await fetch(apiUrl1);
-                if (!streamResponse.ok) {
-                    throw new Error(`API 1 error! status: ${streamResponse.status}`);
-                }
-                const streamData = await streamResponse.json();
-                const streamUrl = streamData.streamUrl;
+    // Function to fetch the data and set up the video player
+    async function setupVideoPlayer() {
+        try {
+            // Fetch the JSON data
+            const response = await fetch(apiUrl);
+            const data = await response.json();
 
-                if (!streamUrl) {
-                    showError('No stream URL found in the API 1 response.');
-                    return;
-                }
+            // Get the first channel's video link and headers
+            const channel = data.channels[0];
+            const videoLink = channel.link;
+            const headers = channel.headers;
 
-                // Fetch headers from API 2
-                const headersResponse = await fetch(apiUrl2);
-                if (!headersResponse.ok) {
-                    throw new Error(`API 2 error! status: ${headersResponse.status}`);
-                }
-                const headersData = await headersResponse.json();
-                const headers = {
-                    Origin: headersData[0].origin,
-                    Referrer: headersData[0].referrer,
-                    'User-Agent': headersData[0].userAgent
-                };
+            // Set video source URL
+            const videoSource = document.getElementById("video-source");
+            videoSource.src = videoLink;
 
-                // Display the m3u8 link
-                displayStreamLink(streamUrl);
+            // Set video details
+            document.getElementById("channel-name").innerText = channel.name;
+            document.getElementById("channel-owner").innerText = `Owner: ${data.owner}`;
 
-                // Play the video
-                playVideo(streamUrl, headers);
+            // Set up the video player to use the correct headers
+            const videoPlayer = document.getElementById("video-player");
 
-            } catch (error) {
-                console.error('Error fetching stream data: ', error); // Log the error for debugging
-                showError('Error fetching stream data: ' + error.message);
-            }
-        }
+            // Add custom headers for the video request
+            const init = {
+                method: "GET",
+                headers: new Headers({
+                    "Cookie": headers.Cookie,
+                    "Host": headers.Host,
+                    "User-Agent": headers["User-agent"]
+                })
+            };
 
-        // Display the m3u8 link
-        function displayStreamLink(streamUrl) {
-            const streamLinkElement = document.getElementById('stream-link');
-            streamLinkElement.textContent = `Stream URL: ${streamUrl}`;
-            streamLinkElement.style.display = 'block';
-        }
-
-        // Play video using HLS.js with headers
-        function playVideo(streamUrl, headers) {
-            const videoElement = document.getElementById('video');
-
-            if (Hls.isSupported()) {
-                const hls = new Hls({
-                    xhrSetup: function(xhr, url) {
-                        // Set headers before making the video request
-                        for (let key in headers) {
-                            xhr.setRequestHeader(key, headers[key]);
-                        }
-                    }
+            // Set the video player's source with custom headers
+            fetch(videoLink, init)
+                .then(() => {
+                    // If the video is available, start the player
+                    videoPlayer.load();
+                    videoPlayer.play();
+                })
+                .catch((error) => {
+                    console.error("Error loading video:", error);
+                    alert("Failed to load video.");
                 });
 
-                hls.loadSource(streamUrl);
-                hls.attachMedia(videoElement);
-
-                hls.on(Hls.Events.MANIFEST_PARSED, function() {
-                    videoElement.play();
-                });
-
-                hls.on(Hls.Events.ERROR, function(event, data) {
-                    console.error('HLS.js error: ', data); // Log HLS.js error for debugging
-                    showError('HLS.js error: ' + data.details);
-                });
-
-            } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
-                // Fallback for browsers that support m3u8 natively (like Safari)
-                videoElement.src = streamUrl;
-                videoElement.play();
-            } else {
-                showError('This browser does not support video playback.');
-            }
+        } catch (error) {
+            console.error("Error fetching JSON data:", error);
+            alert("Failed to load channel data.");
         }
+    }
 
-        // Display error message
-        function showError(message) {
-            const errorMessageElement = document.getElementById('error-message');
-            errorMessageElement.textContent = message;
-            errorMessageElement.style.display = 'block';
-        }
+    // Call the setup function to initialize the video player
+    setupVideoPlayer();
+</script>
 
-        // Initiate the process
-        fetchStreamData();
-    </script>
 </body>
 </html>
