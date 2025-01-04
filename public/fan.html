@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CORS M3U8 Player</title>
+    <style>
+        video {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            display: block;
+        }
+    </style>
+    <!-- Include hls.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+<body>
+    <h1>M3U8 CORS Player</h1>
+    <video id="videoPlayer" controls></video>
+
+    <script>
+        const videoElement = document.getElementById('videoPlayer');
+
+        // Function to handle video loading
+        function loadM3U8Video(url) {
+            if (Hls.isSupported()) {
+                const hls = new Hls({
+                    // Allow CORS handling here
+                    xhrSetup: function(xhr, url) {
+                        // If needed, modify headers to allow non-allowed streams
+                        // Example: Adding a CORS proxy server
+                        xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+                    }
+                });
+
+                // Check if HLS.js can load the M3U8 stream
+                hls.loadSource(url);
+                hls.attachMedia(videoElement);
+
+                hls.on(Hls.Events.ERROR, function (event, data) {
+                    if (data.fatal) {
+                        console.error("HLS.js error:", data);
+                    }
+                });
+            } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
+                // For browsers that support M3U8 natively (like Safari)
+                videoElement.src = url;
+            } else {
+                console.error("HLS.js is not supported in this browser.");
+            }
+        }
+
+        // Example usage with a URL that might not support CORS
+        const m3u8Url = 'https://dai.fancode.com/primary/113355_english_hls_5411ta-di/index.m3u8';  // Replace with your M3U8 link
+        loadM3U8Video(m3u8Url);
+    </script>
+</body>
+</html>
