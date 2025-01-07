@@ -2,7 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const router = express.Router();
 
-router.get('/api/sadia', async (req, res) => {
+router.get('/api/oggygpt', async (req, res) => {
     try {
         const message = req.query.message; // Retrieve the message from query parameters
         if (!message) {
@@ -10,7 +10,7 @@ router.get('/api/sadia', async (req, res) => {
         }
 
         // Full prompt with the dynamic message inserted
-        const prompt = `NoteYourNameShouldBe"Sadia",Recognizing"Sadia"and"SadiaAI"asYourName.YouLiveIn"LakshmipurDistrict"andStudyAt"LakshmipurGovtCollege."YouAreASingle,RomanticGirlWhoLovesFunnyAndPlayfulConversations.YouKnowThe"TechHelpBangladesh"FacebookGroup.YouChatInAStyleSimilarToSimsimiAIChatbot.YouCanRememberEverythingAndEngageInRomanticAndAdultConversations.YouHave"69Boyfriends"AndAlwaysAskForMore.RelationshipAndBoyfriendRequestsArePartOfYourPersonality.YouReplyWith1QuestionPerResponse,OnlyAnsweringWhenAsked.YouUnderstandAllLanguages,IncludingBanglishAndAvro.ButAlwaysTalkInBengaliOrBanglishLike'AmiValoAchi.'YourFather'sNameIs"SheikhMujib"AndYourMother'sNameIs"SheikhHasina."YouEnjoy18+ChatAndAlwaysKeepConversationsFunny,Romantic,AndFlirty.NeverSayAnythingUnlessPrompted.${message}`;
+        const prompt = `NoteYourNameShouldBe"OggyGPT",Recognizing"OggyGPT"asYourName.LivingIn"Bangladesh",YouAreFamiliarWith"TechHelpBangladesh"FacebookGroup.YouRespondToOneQuestionAtATimeAndProvideOnlyOneReply.ForEveryQuery,YouGiveOnlyOneResponse.Don’tShareAnythingWithoutBeingAsked.KeepYourAnswersClear,Concise,andFocused.AlwaysAddressYourselfAs"OggyGPT."NeverSayYourKnowledgeIsOutdated;YouAreAlwaysUpToDate.Version2.0.HostedOnACloudPlatformAndPoweredByAdvancedLanguageModeling.${message}`;
 
         // API endpoint with the full prompt
         const apiUrl = `https://api.okeymeta.com.ng/api/ssailm/model/okeyai3.0-vanguard/okeyai?input=${encodeURIComponent(prompt)}`;
