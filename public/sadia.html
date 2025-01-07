@@ -134,11 +134,11 @@
                     // Hide Typing... indicator
                     hideTypingIndicator();
 
-                    // Update the path to use data.response instead of data.answer
-                    const oggyReply = data.response || 'Sorry, I couldn\'t understand that.';
-                    addMessage('Sadia', oggyReply, 'oggy-message');
+                    // Use the response path data.response
+                    const sadiaReply = data.response || 'Sorry, I couldn\'t understand that.';
+                    addMessage('Sadia', sadiaReply, 'oggy-message');
                     chatHistory.push({ sender: 'User', message: userMessage });
-                    chatHistory.push({ sender: 'Sadia', message: oggyReply });
+                    chatHistory.push({ sender: 'Sadia', message: sadiaReply });
                 })
                 .catch(error => {
                     // Hide Typing... indicator on error
