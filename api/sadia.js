@@ -2,7 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/api/sadia', async (req, res) => {
     try {
         const message = req.query.message; // Retrieve the message from query parameters
         if (!message) {
