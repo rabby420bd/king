@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sadia GPT</title>
+    <title>Oggy GPT</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -21,7 +21,7 @@
 
         @font-face {
             font-family: 'OriginTech';
-            src: url('/OriginTech-personal-use-1.ttf') format('truetype');
+            src: url('/OriginTech-personal-use-1 (1).ttf') format('truetype');
         }
 
         header {
@@ -105,7 +105,7 @@
     </style>
 </head>
 <body>
-    <header>Sadia GPT</header>
+    <header>Oggy GPT</header>
     <div id="chat-container"></div>
     <div id="bottom-box">
         <input type="text" id="user-input" placeholder="Type your message...">
@@ -128,17 +128,17 @@
             showTypingIndicator();
 
             // Make API request
-            fetch(`https://kingicharles.onrender.com/api/sadia?message=${encodeURIComponent(userMessage)}`)
+            fetch(`https://kingicharles.onrender.com/api/oggy?message=${encodeURIComponent(userMessage)}`)
                 .then(response => response.json())
                 .then(data => {
                     // Hide Typing... indicator
                     hideTypingIndicator();
 
                     // Use the response path data.response
-                    const sadiaReply = data.response || 'Sorry, I couldn\'t understand that.';
-                    addMessage('Sadia', sadiaReply, 'oggy-message');
+                    const oggyReply = data.response || 'Sorry, I couldn\'t understand that.';
+                    addMessage('Oggy', oggyReply, 'oggy-message');
                     chatHistory.push({ sender: 'User', message: userMessage });
-                    chatHistory.push({ sender: 'Sadia', message: sadiaReply });
+                    chatHistory.push({ sender: 'Oggy', message: oggyReply });
                 })
                 .catch(error => {
                     // Hide Typing... indicator on error
@@ -150,7 +150,7 @@
         function showTypingIndicator() {
             const typingIndicator = document.createElement('div');
             typingIndicator.className = 'message typing-indicator';
-            typingIndicator.innerHTML = 'Sadia is Typing...';
+            typingIndicator.innerHTML = 'Oggy is Typing...';
             chatContainer.appendChild(typingIndicator);
             chatContainer.scrollTop = chatContainer.scrollHeight;
         }
