@@ -128,7 +128,7 @@
             showTypingIndicator();
 
             // Make API request
-            fetch(`https://kingicharles.onrender.com/api/oggy?message=${encodeURIComponent(userMessage)}`)
+            fetch(`https://kingicharles.onrender.com/api/oggygpt?message=${encodeURIComponent(userMessage)}`)
                 .then(response => response.json())
                 .then(data => {
                     // Hide Typing... indicator
